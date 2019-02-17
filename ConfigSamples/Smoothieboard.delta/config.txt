@@ -10,20 +10,20 @@ mm_per_arc_segment                           0.0              # Fixed length for
 mm_max_arc_error                             0.01             # The maximum error for line segments that divide arcs 0 to disable
                                                               # note it is invalid for both the above be 0
                                                               # if both are used, will use largest segment length based on radius
-delta_segments_per_second                    100              # For deltas only, number of segments per second, set to 0 to disable
+delta_segments_per_second                    130              # For deltas only, number of segments per second, set to 0 to disable
                                                               # and use mm_per_line_segment
 
 # Arm solution configuration : Cartesian robot. Translates mm positions into stepper positions
 # See http://smoothieware.org/stepper-motors
-alpha_steps_per_mm                           100              # Steps per mm for alpha ( X ) stepper and tower
-beta_steps_per_mm                            100              # Steps per mm for beta ( Y ) stepper and tower
-gamma_steps_per_mm                           100              # Steps per mm for gamma ( Z ) stepper and tower
+alpha_steps_per_mm                           53.33            # Steps per mm for alpha ( X ) stepper and tower
+beta_steps_per_mm                            53.33            # Steps per mm for beta ( Y ) stepper and tower
+gamma_steps_per_mm                           53.33            # Steps per mm for gamma ( Z ) stepper and tower
 
 # Delta configuration
 # See http://smoothieware.org/delta
 arm_solution                                 linear_delta     # Selects the linear delta arm solution
-arm_length                                   250.0            # This is the length of an arm from hinge to hinge
-arm_radius                                   124.0            # This is the horizontal distance from hinge to hinge when the effector is centered
+arm_length                                   407.9            # This is the length of an arm from hinge to hinge
+arm_radius                                   205.1            # This is the horizontal distance from hinge to hinge when the effector is centered
 
 # Planner module configuration : Look-ahead and acceleration configuration
 # See http://smoothieware.org/motion-control
@@ -33,9 +33,9 @@ junction_deviation                           0.05             # See http://smoot
 #z_junction_deviation                        0.0              # For Z only moves, -1 uses junction_deviation, zero disables junction_deviation on z moves DO NOT SET ON A DELTA
 
 # Cartesian axis speed limits
-x_axis_max_speed                             30000            # Maximum speed in mm/min
-y_axis_max_speed                             30000            # Maximum speed in mm/min
-z_axis_max_speed                             30000            # Maximum speed in mm/min
+x_axis_max_speed                             90000            # Maximum speed in mm/min
+y_axis_max_speed                             90000            # Maximum speed in mm/min
+z_axis_max_speed                             90000            # Maximum speed in mm/min
 
 # Stepper module configuration 
 # Pins are defined as  ports, and pin numbers, appending "!" to the number will invert a pin
@@ -44,27 +44,27 @@ alpha_step_pin                               2.0              # Pin for alpha st
 alpha_dir_pin                                0.5              # Pin for alpha stepper direction, add '!' to reverse direction
 alpha_en_pin                                 0.4              # Pin for alpha enable pin
 alpha_current                                1.5              # M1 stepper motor current
-alpha_max_rate                               30000.0          # Maximum rate in mm/min
+alpha_max_rate                               90000.0          # Maximum rate in mm/min
 
 beta_step_pin                                2.1              # Pin for beta stepper step signal
 beta_dir_pin                                 0.11             # Pin for beta stepper direction, add '!' to reverse direction
 beta_en_pin                                  0.10             # Pin for beta enable
 beta_current                                 1.5              # M2 stepper motor current
-beta_max_rate                                30000.0          # Maxmimum rate in mm/min
+beta_max_rate                                90000.0          # Maxmimum rate in mm/min
 
 gamma_step_pin                               2.2              # Pin for gamma stepper step signal
 gamma_dir_pin                                0.20             # Pin for gamma stepper direction, add '!' to reverse direction
 gamma_en_pin                                 0.19             # Pin for gamma enable
 gamma_current                                1.5              # M3 stepper motor current
-gamma_max_rate                               30000.0          # Maximum rate in mm/min
+gamma_max_rate                               90000.0          # Maximum rate in mm/min
 
 ## Extruder module configuration
 # See http://smoothieware.org/extruder
 extruder.hotend.enable                          true          # Whether to activate the extruder module at all. All configuration is ignored if false
-extruder.hotend.steps_per_mm                    140           # Steps per mm for extruder stepper
+extruder.hotend.steps_per_mm                    837           # Steps per mm for extruder stepper
 extruder.hotend.default_feed_rate               600           # Default rate ( mm/minute ) for moves where only the extruder moves
 extruder.hotend.acceleration                    500           # Acceleration for the stepper motor mm/sec²
-extruder.hotend.max_speed                       50            # Maximum speed in mm/s
+extruder.hotend.max_speed                       100           # Maximum speed in mm/s
 
 extruder.hotend.step_pin                        2.3           # Pin for extruder step signal
 extruder.hotend.dir_pin                         0.22          # Pin for extruder dir signal ( add '!' to reverse direction )
@@ -208,17 +208,17 @@ switch.fan.output_type                       pwm              # PWM output setta
 endstops_enable                              true             # The endstop module is disabled by default and must be enabled here
 delta_homing                                 true             # Forces all three axis to home a the same time regardless of what is specified in G28
 alpha_min_endstop                            nc               # Pin to read min endstop, add a ! to invert if endstop is NO connected to ground
-alpha_max_endstop                            1.25^            # Pin to read max endstop, uncomment this and comment the above if using max endstops
+alpha_max_endstop                            1.24^            # Pin to read max endstop, uncomment this and comment the above if using max endstops
 alpha_homing_direction                       home_to_max      # Or set to home_to_max and set alpha_max and uncomment the alpha_max_endstop
 alpha_max                                    0                # This gets loaded as the current position after homing when home_to_max is set
 beta_min_endstop                             nc               # Pin to read min endstop, add a ! to invert if endstop is NO connected to ground
 beta_max_endstop                             1.27^            # Pin to read max endstop, uncomment this and comment the above if using max endstops
 beta_homing_direction                        home_to_max      # Or set to home_to_max and set alpha_max and uncomment the alpha_max_endstop
 beta_max                                     0                # This gets loaded as the current position after homing when home_to_max is set
-gamma_min_endstop                            nc               # Pin to read min endstop, add a ! to invert if endstop is NO connected to ground
+gamma_min_endstop                            1.28!^           # Pin to read min endstop, add a ! to invert if endstop is NO connected to ground
 gamma_max_endstop                            1.29^            # Pin to read max endstop, uncomment this and comment the above if using max endstops
 gamma_homing_direction                       home_to_max      # Or set to home_to_max and set alpha_max and uncomment the alpha_max_endstop
-gamma_max                                    300              # This gets loaded as the current position after homing when home_to_max is set
+gamma_max                                    4063.8           # This gets loaded as the current position after homing when home_to_max is set
 
 alpha_max_travel                             1000             # Max travel in mm for alpha/X axis when homing
 beta_max_travel                              1000             # Max travel in mm for beta/Y axis when homing
@@ -252,8 +252,8 @@ gamma_trim_mm                                   0                # Software trim
 
 ## Z-probe
 # See http://smoothieware.org/zprobe
-zprobe.enable                                false           # Set to true to enable a zprobe
-zprobe.probe_pin                             1.28!^          # Pin probe is attached to, if NC remove the !
+zprobe.enable                                true            # Set to true to enable a zprobe
+zprobe.probe_pin                             1.28^           # Pin probe is attached to, if NC remove the !
 zprobe.slow_feedrate                         5               # Mm/sec probe feed rate
 #zprobe.debounce_ms                          1               # Set if noisy
 zprobe.fast_feedrate                         100             # Move feedrate mm/sec
@@ -263,33 +263,33 @@ zprobe.probe_height                          5               # How much above be
 # Levelling strategy
 
 # Example for the delta calibration strategy
-#leveling-strategy.delta-calibration.enable   true            # Enable basic delta calibration
-#leveling-strategy.delta-calibration.radius   100             # the probe radius
+leveling-strategy.delta-calibration.enable   true            # Enable basic delta calibration
+leveling-strategy.delta-calibration.radius   160             # the probe radius
 
 # Example for the delta grid leveling strategy
-#leveling-strategy.delta-grid.enable          true            # Enable grid leveling
-#leveling-strategy.delta-grid.radius          50              # Grid radius in millimeters
-#leveling-strategy.delta-grid.size            7               # Grid size, must be an odd number
-#leveling-strategy.delta-grid.do_home         true            # Whether to home before calibration
-#leveling-strategy.delta-grid.save            true            # Whether to automatically save the grid
-#leveling-strategy.delta-grid.initial_height  10              # Height at which to start probling
+leveling-strategy.delta-grid.enable          true            # Enable grid leveling
+leveling-strategy.delta-grid.radius          160             # Grid radius in millimeters
+leveling-strategy.delta-grid.size            7               # Grid size, must be an odd number
+leveling-strategy.delta-grid.do_home         true            # Whether to home before calibration
+leveling-strategy.delta-grid.save            true            # Whether to automatically save the grid
+leveling-strategy.delta-grid.initial_height  30              # Height at which to start probling
 
 ## Panel
 # See http://smoothieware.org/panel
 # Please find your panel on the wiki and copy/paste the right configuration here
-panel.enable                                 false             # Set to true to enable the panel code
+panel.enable                                 true             # Set to true to enable the panel code
 
 # Example for reprap discount GLCD
 # on glcd EXP1 is to left and EXP2 is to right, pin 1 is bottom left, pin 2 is top left etc.
 # +5v is EXP1 pin 10, Gnd is EXP1 pin 9
-#panel.lcd                                   reprap_discount_glcd     #
-#panel.spi_channel                           0                 # SPI channel to use  ; GLCD EXP1 Pins 3,5 (MOSI, SCLK)
-#panel.spi_cs_pin                            0.16              # SPI chip select     ; GLCD EXP1 Pin 4
-#panel.encoder_a_pin                         3.25!^            # Encoder pin         ; GLCD EXP2 Pin 3
-#panel.encoder_b_pin                         3.26!^            # Encoder pin         ; GLCD EXP2 Pin 5
-#panel.click_button_pin                      1.30!^            # Click button        ; GLCD EXP1 Pin 2
-#panel.buzz_pin                              1.31              # Pin for buzzer      ; GLCD EXP1 Pin 1
-#panel.back_button_pin                       2.11!^            # Back button         ; GLCD EXP2 Pin 8
+panel.lcd                                   reprap_discount_glcd     #
+panel.spi_channel                           0                 # SPI channel to use  ; GLCD EXP1 Pins 3,5 (MOSI, SCLK)
+panel.spi_cs_pin                            0.16              # SPI chip select     ; GLCD EXP1 Pin 4
+panel.encoder_a_pin                         3.25!^            # Encoder pin         ; GLCD EXP2 Pin 3
+panel.encoder_b_pin                         3.26!^            # Encoder pin         ; GLCD EXP2 Pin 5
+panel.click_button_pin                      1.30!^            # Click button        ; GLCD EXP1 Pin 2
+panel.buzz_pin                              1.31              # Pin for buzzer      ; GLCD EXP1 Pin 1
+panel.back_button_pin                       2.11!^            # Back button         ; GLCD EXP2 Pin 8
 
 panel.menu_offset                            0                 # Some panels will need 1 here
 
@@ -297,16 +297,16 @@ panel.alpha_jog_feedrate                     6000              # X jogging feedr
 panel.beta_jog_feedrate                      6000              # Y jogging feedrate in mm/min
 panel.gamma_jog_feedrate                     200               # Z jogging feedrate in mm/min
 
-panel.hotend_temperature                     185               # Temp to set hotend when preheat is selected
+panel.hotend_temperature                     210               # Temp to set hotend when preheat is selected
 panel.bed_temperature                        60                # Temp to set bed when preheat is selected
 
 ## Custom menus : Example of a custom menu entry, which will show up in the Custom entry.
 # NOTE _ gets converted to space in the menu and commands, | is used to separate multiple commands
-custom_menu.power_on.enable                true              #
+custom_menu.power_on.enable                false             #
 custom_menu.power_on.name                  Power_on          #
 custom_menu.power_on.command               M80               #
 
-custom_menu.power_off.enable               true              #
+custom_menu.power_off.enable               fasle             #
 custom_menu.power_off.name                 Power_off         #
 custom_menu.power_off.command              M81               #
 
